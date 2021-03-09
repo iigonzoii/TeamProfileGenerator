@@ -11,8 +11,8 @@ const writeFileAsync = util.promisify(fs.writeFile)
 
 // todo create main question prompt
 // const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
-async function promptUser (){
-    inquirer.prompt([
+async function promptUser() {
+    let data = await inquirer.prompt([
         {
             type: 'input',
             name: 'name',
@@ -39,16 +39,15 @@ async function promptUser (){
             ]
         },
     ]);
-}
+
 
     // todo create prompt for Engineer
-    //  does it matter where these commas go? punctuation/syntax may be wrong!
-await inquirer.prompt([{
-    type: "input",
-    name: "?",
-    message: "What is the employee's github username?",
-}
-])
+    //  does it matter where these commas go? punctuation/syntax may be wrong! i think they go between my curly and array because there is another prompt at the end of the list and the objects need to be seperated. imagining this as being part of the original prompt structure even though it "looks seperate"
+    await inquirer.prompt([{
+        type: "input",
+        name: "?",
+        message: "What is the employee's github username?",
+    },])
 
     // todo create prompt for Intern
     //  does it matter where these commas go? punctuation/syntax may be wrong!
@@ -56,9 +55,9 @@ await inquirer.prompt([{
         type: "input",
         name: "?",
         message: "What is the employee's github username?",
-    }
-    ])  
+    },])
+}
+async function runApp() {
+    await promptUser()
+}
 
-    async function runApp(){
-        await promptUser()
-    }
