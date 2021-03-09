@@ -41,23 +41,29 @@ async function promptUser() {
     ]);
 
 
+
+
     // todo create prompt for Engineer
     //  does it matter where these commas go? punctuation/syntax may be wrong! i think they go between my curly and array because there is another prompt at the end of the list and the objects need to be seperated. imagining this as being part of the original prompt structure even though it "looks seperate"
-    await inquirer.prompt([{
-        type: "input",
-        name: "?",
-        message: "What is the employee's github username?",
-    },])
+    if (data.role === "Engineer") {
+        dataTwo = await inquirer.prompt([{
+            type: "input",
+            name: "?",
+            message: "What is the employee's github username?",
+        },])
 
-    // todo create prompt for Intern
-    //  does it matter where these commas go? punctuation/syntax may be wrong!
-    await inquirer.prompt([{
-        type: "input",
-        name: "?",
-        message: "What is the employee's github username?",
-    },])
-}
-async function runApp() {
-    await promptUser()
-}
+        // todo create prompt for Intern
+        //  does it matter where these commas go? punctuation/syntax may be wrong!
+    } else if (data.role === "Intern") {
+        dataTwo = await inquirer.prompt([{
+            type: "input",
+            name: "?",
+            message: "What school does this employee attend?",
+        },])
+
+
+    }
+    async function runApp() {
+        await promptUser()
+    }
 
