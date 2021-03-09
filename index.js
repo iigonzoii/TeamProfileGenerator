@@ -60,9 +60,16 @@ async function promptUser() {
             name: "?",
             message: "What school does this employee attend?",
         },])
-
-
+        // todo create prompt for manager
+        // no true statement is required because manager is the only remaining option
+    } else {
+        dataTwo = await inquirer.prompt([{
+            type: "input",
+            name: "?",
+            message: "What is the employee's office number?",
+        },])
     }
+}
     async function runApp() {
         await promptUser()
     }
