@@ -11,7 +11,7 @@ const writeFileAsync = util.promisify(fs.writeFile)
 
 // todo create main question prompt
 // const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
-const promptUser = () =>
+async function promptUser (){
     inquirer.prompt([
         {
             type: 'input',
@@ -39,6 +39,7 @@ const promptUser = () =>
             ]
         },
     ]);
+}
 
     // todo create prompt for Engineer
     //  does it matter where these commas go? punctuation/syntax may be wrong!
@@ -57,3 +58,7 @@ await inquirer.prompt([{
         message: "What is the employee's github username?",
     }
     ])  
+
+    async function runApp(){
+        await promptUser()
+    }
