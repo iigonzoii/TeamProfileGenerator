@@ -72,5 +72,7 @@ async function promptUser() {
 }
     async function runApp() {
         await promptUser()
+// !somewhere in here we are going to write everything to the html using a for loop and template literals, or a forloop that pushes everything to the html page, maybe both?
+
     }
 
