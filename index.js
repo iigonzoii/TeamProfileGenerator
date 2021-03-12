@@ -14,7 +14,7 @@ const writeFileAsync = util.promisify(fs.writeFile)
 // todo create main question prompt
 // const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
 async function promptUser() {
-    
+
     let data = await inquirer.prompt([
         {
             type: 'input',
@@ -54,16 +54,22 @@ async function promptUser() {
             name: "github",
             message: "What is the employee's github username?",
         },])
-console.log("create engineer with class constructor and push to team array")
-askIfMoreEmployees()
+        console.log("create engineer with class constructor and push to team array")
+        const engineer = new Engineer(data.name, data.id, data.email, dataTwo.github);
+        team.push(engineer)
+        askIfMoreEmployees()
+
         // todo create prompt for Intern
-        //  does it matter where these commas go? punctuation/syntax may be wrong!
     } else if (data.role === "Intern") {
         dataTwo = await inquirer.prompt([{
             type: "input",
             name: "school",
             message: "What school does this employee attend?",
         },])
+        const intern = new Intern(data.name, data.id, data.email, dataTwo.school);
+        team.push(Intern)
+        askIfMoreEmployees()
+
         // todo create prompt for manager
         // no true statement is required because manager is the only remaining option
     } else {
@@ -72,26 +78,30 @@ askIfMoreEmployees()
             name: "officeNumber",
             message: "What is the employee's office number?",
         },])
+        const manager = new Manager(data.name, data.id, data.email, dataTwo.officeNumber);
+        team.push(manager);
+        askIfMoreEmployees()
     }
 
 }
 
 
-    async function askIfMoreEmployees() {
-        dataTwo = await inquirer.prompt([{
-            type: "confirm",
-            name: "addAnother",
-            message: "Would you like to add another employee?",
-        },])
-        if (dataTwo.addAnother){
-          promptUser()  
-        } else{
-           // !somewhere in here we are going to write everything to the html using a for loop and template literals, or a forloop that pushes everything to the html page, maybe both? // loop through team and generate html use fs to createfile
-        }
-        
-
-
+async function askIfMoreEmployees() {
+    // function that will determine if its time to run the prompt again or if the program should start generating cards.
+    dataTwo = await inquirer.prompt([{
+        type: "confirm",
+        name: "addAnother",
+        message: "Would you like to add another employee?",
+    },])
+    if (dataTwo.addAnother) {
+        promptUser()
+    } else {
+        // !somewhere in here we are going to write everything to the html using a for loop and template literals, or a forloop that pushes everything to the html page, maybe both? // loop through team and generate html use fs to createfile
     }
 
-    promptUser()
+
+
+}
+
+promptUser()
 
