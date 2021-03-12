@@ -7,9 +7,11 @@ const Intern = require("./lib/Intern")
 
 let team = []
 
+
 // create writeFile function using promises instead of a callback function(util.promisfy)
-// writeFile instead of write so it keeps trying until all of data is written or an error occurs
-const writeFileAsync = util.promisify(fs.writeFile)
+const writeFileAsync = util.promisify(fs.writeFile);
+// create appendfile as a step in my forloop
+
 
 // todo create main question prompt
 // const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
@@ -47,10 +49,9 @@ async function promptUser() {
     if (data.role === "Engineer") {
         dataTwo = await inquirer.prompt([{
             type: "input",
-            name: "github",
+            name: "extendedQuestion",
             message: "What is the employee's github username?",
         },])
-        console.log("create engineer with class constructor and push to team array")
         const engineer = new Engineer(data.name, data.id, data.email, dataTwo.github);
         team.push(engineer)
         askIfMoreEmployees()
@@ -59,7 +60,8 @@ async function promptUser() {
     } else if (data.role === "Intern") {
         dataTwo = await inquirer.prompt([{
             type: "input",
-            name: "school",
+            // will name all employee class extentions the same thing so we dont have to include if else statements in my forloop
+            name: "extendedQuestion",
             message: "What school does this employee attend?",
         },])
         const intern = new Intern(data.name, data.id, data.email, dataTwo.school);
@@ -71,7 +73,7 @@ async function promptUser() {
     } else {
         dataTwo = await inquirer.prompt([{
             type: "input",
-            name: "officeNumber",
+            name: "extendedQuestion",
             message: "What is the employee's office number?",
         },])
         const manager = new Manager(data.name, data.id, data.email, dataTwo.officeNumber);
@@ -83,22 +85,30 @@ async function promptUser() {
 
 async function askIfMoreEmployees() {
     // function that will determine if its time to run the prompt again or if the program should start generating cards.
-    dataTwo = await inquirer.prompt([{
-        type: "confirm",
-        name: "addAnother",
-        message: "Would you like to add another employee?",
-    },])
-    if (dataTwo.addAnother) {
-        promptUser()
-    } else {
-       // loop through team and generate html using fs to createfile
-       for (let i = 0; i < team.length; i++) {
-           let html = `
-           
+    try {
+        dataTwo = await inquirer.prompt([{
+            type: "confirm",
+            name: "addAnother",
+            message: "Would you like to add another employee?",
+        },])
+        if (dataTwo.addAnother) {
+            promptUser()
+        } else {
+            // loop through team and generate html using fs to createfile
+            for (let i = 0; i < team.length; i++) {
+                let html = `
+           <h1>${team[i].name}
+           <h2>${team[i].role}<h2>
+           <p>${team[i].id}<p>
+           <p>${team.extendedQuestion}<p>
            `
-           
-       }
-
+                
+                writeFileAsync("./dist/index.html", team.toString())
+            }
+            console.log("Big success :)")
+        }
+    } catch (err) {
+        console.log(err)
     }
 }
 
