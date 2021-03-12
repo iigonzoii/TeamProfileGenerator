@@ -5,6 +5,8 @@ const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
 
+let team = []
+
 // create writeFile function using promises instead of a callback function(util.promisfy)
 // writeFile instead of write so it keeps trying until all of data is written or an error occurs
 const writeFileAsync = util.promisify(fs.writeFile)
@@ -12,6 +14,7 @@ const writeFileAsync = util.promisify(fs.writeFile)
 // todo create main question prompt
 // const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
 async function promptUser() {
+    
     let data = await inquirer.prompt([
         {
             type: 'input',
@@ -51,7 +54,8 @@ async function promptUser() {
             name: "github",
             message: "What is the employee's github username?",
         },])
-
+console.log("create engineer with class constructor and push to team array")
+askIfMoreEmployees()
         // todo create prompt for Intern
         //  does it matter where these commas go? punctuation/syntax may be wrong!
     } else if (data.role === "Intern") {
@@ -69,10 +73,25 @@ async function promptUser() {
             message: "What is the employee's office number?",
         },])
     }
+
 }
-    async function runApp() {
-        await promptUser()
-// !somewhere in here we are going to write everything to the html using a for loop and template literals, or a forloop that pushes everything to the html page, maybe both?
+
+
+    async function askIfMoreEmployees() {
+        dataTwo = await inquirer.prompt([{
+            type: "confirm",
+            name: "addAnother",
+            message: "Would you like to add another employee?",
+        },])
+        if (dataTwo.addAnother){
+          promptUser()  
+        } else{
+           // !somewhere in here we are going to write everything to the html using a for loop and template literals, or a forloop that pushes everything to the html page, maybe both? // loop through team and generate html use fs to createfile
+        }
+        
+
 
     }
+
+    promptUser()
 
