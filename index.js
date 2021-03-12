@@ -48,7 +48,7 @@ async function promptUser() {
     if (data.role === "Engineer") {
         dataTwo = await inquirer.prompt([{
             type: "input",
-            name: "?",
+            name: "github",
             message: "What is the employee's github username?",
         },])
 
@@ -57,7 +57,7 @@ async function promptUser() {
     } else if (data.role === "Intern") {
         dataTwo = await inquirer.prompt([{
             type: "input",
-            name: "?",
+            name: "school",
             message: "What school does this employee attend?",
         },])
         // todo create prompt for manager
@@ -65,7 +65,7 @@ async function promptUser() {
     } else {
         dataTwo = await inquirer.prompt([{
             type: "input",
-            name: "?",
+            name: "officeNumber",
             message: "What is the employee's office number?",
         },])
     }
