@@ -43,11 +43,7 @@ async function promptUser() {
         },
     ]);
 
-
-
-
     // todo create prompt for Engineer
-    //  does it matter where these commas go? punctuation/syntax may be wrong! i think they go between my curly and array because there is another prompt at the end of the list and the objects need to be seperated. imagining this as being part of the original prompt structure even though it "looks seperate"
     if (data.role === "Engineer") {
         dataTwo = await inquirer.prompt([{
             type: "input",
@@ -85,7 +81,6 @@ async function promptUser() {
 
 }
 
-
 async function askIfMoreEmployees() {
     // function that will determine if its time to run the prompt again or if the program should start generating cards.
     dataTwo = await inquirer.prompt([{
@@ -96,11 +91,15 @@ async function askIfMoreEmployees() {
     if (dataTwo.addAnother) {
         promptUser()
     } else {
-        // !somewhere in here we are going to write everything to the html using a for loop and template literals, or a forloop that pushes everything to the html page, maybe both? // loop through team and generate html use fs to createfile
+       // loop through team and generate html using fs to createfile
+       for (let i = 0; i < team.length; i++) {
+           let html = `
+           
+           `
+           
+       }
+
     }
-
-
-
 }
 
 promptUser()
