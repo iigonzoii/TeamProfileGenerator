@@ -1,4 +1,4 @@
-/* #container{
+#container{
     display: grid;
     grid-template-columns:1fr 1fr 1fr 1fr 1fr;
     grid-gap: 30px;
@@ -8,4 +8,4 @@
     margin-top: 30px;
     padding: 30px;
     font-size: 1em;
-} */
+}

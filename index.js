@@ -52,7 +52,7 @@ async function promptUser() {
             name: "extendedQuestion",
             message: "What is the employee's github username?",
         },])
-        const engineer = new Engineer(data.name, data.id, data.email, dataTwo.github);
+        const engineer = new Engineer(data.name, data.id, data.email, dataTwo.extendedQuestion);
         team.push(engineer)
         askIfMoreEmployees()
 
@@ -64,8 +64,8 @@ async function promptUser() {
             name: "extendedQuestion",
             message: "What school does this employee attend?",
         },])
-        const intern = new Intern(data.name, data.id, data.email, dataTwo.school);
-        team.push(Intern)
+        const intern = new Intern(data.name, data.id, data.email, dataTwo.extendedQuestion);
+        team.push(intern)
         askIfMoreEmployees()
 
         // todo create prompt for manager
@@ -76,7 +76,7 @@ async function promptUser() {
             name: "extendedQuestion",
             message: "What is the employee's office number?",
         },])
-        const manager = new Manager(data.name, data.id, data.email, dataTwo.officeNumber);
+        const manager = new Manager(data.name, data.id, data.email, dataTwo.extendedQuestion);
         team.push(manager);
         askIfMoreEmployees()
     }
@@ -95,16 +95,30 @@ async function askIfMoreEmployees() {
             promptUser()
         } else {
             // loop through team and generate html using fs to createfile
+            let html = ""
+            console.log("team",team)
             for (let i = 0; i < team.length; i++) {
-                let html = `
-           <h1>${team[i].name}
-           <h2>${team[i].role}<h2>
+                // if 102 through 106 gives you an issue add the method insted of the inquirer object name
+                html += `
+           <h1>${team[i].name}<h1>
+           <h2>${team[i].title}<h2>
            <p>${team[i].id}<p>
-           <p>${team.extendedQuestion}<p>
+           <p>${team[i].title === "Engineer" ? team[i].github : team[i].title === "Intern" ? team[i].school : team[i].officeNumber}</p>
+           
            `
-                
-                writeFileAsync("./dist/index.html", team.toString())
             }
+            html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/style.css">
+
+    <title>Team profile generator</title>
+</head>
+<body><div id="container">` + html + `</div></body></html>`
+            writeFileAsync("./dist/index.html", html)
             console.log("Big success :)")
         }
     } catch (err) {
@@ -113,4 +127,3 @@ async function askIfMoreEmployees() {
 }
 
 promptUser()
-
