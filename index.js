@@ -13,6 +13,8 @@ const writeFileAsync = util.promisify(fs.writeFile);
 // create appendfile as a step in my forloop
 
 
+
+
 // todo create main question prompt
 // const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
 async function promptUser() {
@@ -102,7 +104,7 @@ async function askIfMoreEmployees() {
                 html += `
            <h1>${team[i].name}<h1>
            <h2>${team[i].title}<h2>
-           <p>${team[i].id}<p>
+           <p>ID:${team[i].id}<p>
            <p>${team[i].title === "Engineer" ? team[i].github : team[i].title === "Intern" ? team[i].school : team[i].officeNumber}</p>
            
            `
@@ -117,7 +119,9 @@ async function askIfMoreEmployees() {
 
     <title>Team profile generator</title>
 </head>
-<body><div id="container">` + html + `</div></body></html>`
+<body>
+<header>My Team</header>
+<div id="container">` + html + `</div></body></html>`
             writeFileAsync("./dist/index.html", html)
             console.log("Big success :)")
         }
@@ -127,3 +131,17 @@ async function askIfMoreEmployees() {
 }
 
 promptUser()
+
+
+// let questionFourDisplay = async function roleSelection(){
+//     await askIfMoreEmployees(team)
+//     if(team[i].title === "Engineer"){
+//         return `github:${team[i].github}`
+//     }
+//     else if (team[i].title === "Intern") {
+//         return `School:${team[i].school}`
+//     } else{
+//         return `Office Number${team[i].officeNumber}`
+//     }
+// }
+
