@@ -16,7 +16,6 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 
 // todo create main question prompt
-// const promptUser = async () => { inquirer.prompt([..... is that how i would write an async arrow function? do i need the curly after the arrow?
 async function promptUser() {
 
     let data = await inquirer.prompt([
@@ -98,15 +97,20 @@ async function askIfMoreEmployees() {
         } else {
             // loop through team and generate html using fs to createfile
             let html = ""
-            console.log("team",team)
             for (let i = 0; i < team.length; i++) {
                 // if 102 through 106 gives you an issue add the method insted of the inquirer object name
                 html += `
-           <h1>${team[i].name}<h1>
-           <h2>${team[i].title}<h2>
-           <p>ID:${team[i].id}<p>
-           <p>${team[i].title === "Engineer" ? team[i].github : team[i].title === "Intern" ? team[i].school : team[i].officeNumber}</p>
-           
+<div class="card">
+<div class=" card-top">
+        <h1>${team[i].name}</h1>
+        <h2>${team[i].title}</h2>
+    </div>
+    <div class="card-details">
+        <p>ID:${team[i].id}</p>
+        <p class="email">Email:${team[i].email}</p>
+        <p>${team[i].title === "Engineer" ? `Github:${team[i].github}` : team[i].title === "Intern" ? `School:${team[i].school}` : `Office Number:${team[i].officeNumber}`}</p>
+    </div>          
+</div>
            `
             }
             html = `<!DOCTYPE html>
@@ -116,12 +120,13 @@ async function askIfMoreEmployees() {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/style.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <title>Team profile generator</title>
 </head>
 <body>
 <header>My Team</header>
-<div id="container">` + html + `</div></body></html>`
+<div id="container">` + html + `
+</div></body></html>`
             writeFileAsync("./dist/index.html", html)
             console.log("Big success :)")
         }
