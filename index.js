@@ -103,12 +103,13 @@ async function askIfMoreEmployees() {
 <div class="card">
 <div class=" card-top">
         <h1>${team[i].name}</h1>
-        <h2>${team[i].title}</h2>
+        <h2>${team[i].title === "Engineer" ? `<i class="fas fa-glasses"></i> ${team[i].title}` : team[i].title === "Intern" ? `<i class="fas fa-school"></i> ${team[i].title}` : `<i class="fas fa-coffee"></i> ${team[i].title}`}</h2>
     </div>
     <div class="card-details">
         <p>ID:${team[i].id}</p>
         <p class="email">Email:${team[i].email}</p>
-        <p>${team[i].title === "Engineer" ? `Github:${team[i].github}` : team[i].title === "Intern" ? `School:${team[i].school}` : `Office Number:${team[i].officeNumber}`}</p>
+        <p>${team[i].title === "Engineer" ? `Github: ${team[i].github}` : team[i].title === "Intern" ? `School: ${team[i].school}` : `Office Number: ${team[i].officeNumber}`}</p>
+        
     </div>          
 </div>
            `
@@ -136,17 +137,3 @@ async function askIfMoreEmployees() {
 }
 
 promptUser()
-
-
-// let questionFourDisplay = async function roleSelection(){
-//     await askIfMoreEmployees(team)
-//     if(team[i].title === "Engineer"){
-//         return `github:${team[i].github}`
-//     }
-//     else if (team[i].title === "Intern") {
-//         return `School:${team[i].school}`
-//     } else{
-//         return `Office Number${team[i].officeNumber}`
-//     }
-// }
-
